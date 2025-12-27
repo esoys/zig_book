@@ -90,4 +90,42 @@ pub fn main() !void {
             try stdout.flush();
         },
     }
+
+    try deferCheck();
+    errdefer std.debug.print(">>errdefer<<\n", .{});
+    //try errdeferCheck();
+    
+    const name: []const u8 = "'Erik'";
+    try stdout.print("{s}...\n", .{name});
+    try stdout.print("  - in Hex: ", .{});
+
+    for (name) |char| {
+        try stdout.print("{X} ", .{char});
+    }
+
+    try stdout.print("\n", .{});
+
+    try stdout.print("  - index:  ", .{});
+
+    for (name, 0..) |_, i| {
+        try stdout.print(" {d} ", .{i});
+    }
+
+    try stdout.print("\n", .{});
+    try stdout.flush();
+
+
 }
+
+fn deferCheck() !void {
+    defer std.debug.print(">>function defer<<\n", .{});
+    var i: i32 = 4;
+    while (i > 0) : (i -= 1) {
+        defer std.debug.print(">>loop defer<<\n", .{});
+        std.debug.print("{d}...| ", .{i});
+    }
+    //expect function checkt ob der logische test (i == 0) true ist. Falls ja, macht die function nichts. ansonsten raised sie ein assertion error
+    try std.testing.expect(i == 0);
+}
+
+fn errdeferCheck() !void { return error.TestError; }
