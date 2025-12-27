@@ -26,5 +26,7 @@ pub fn main() !void {
     try stdout.print("type of i32: {}, type of arr: {}, typeof p_arr: {}, val of p_arr (hex): {X}\n", .{@TypeOf(x), @TypeOf(arr), @TypeOf(p_arr), p_arr});
     try stdout.flush();
 
-
+    // CHAPTER 2: Control Flow
+    try stdout.print("2. Control FLow\n", .{});
+    try stdout.flush();
 }
