@@ -76,6 +76,7 @@ pub fn main() !void {
 
 
     //labeled switch statement
+    // mit continue kann man den switch von vorne durchgehen mit dem neuen wert (der nach Endstatement des Labels ausgegeben wird)
     switch_label: switch (@as(u8, 1)) {
         1 => {
             try stdout.print("Labeled switch first branch\n", .{});
