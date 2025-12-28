@@ -140,6 +140,36 @@ pub fn main() !void {
         .email = "kek@mail.com",
     };
     try other_user.print_name();
+
+    var vec1: oop.Vec3 = .{
+        .x = 3,
+        .y = 3,
+        .z = 3,
+    };
+
+    const vec2: oop.Vec3 = .{
+        .x = 1,
+        .y = 1,
+        .z = 1,
+    };
+
+    const sqr = oop.Square {
+        .x = 5,
+        .y = 6,
+    };
+
+    const sqr2: oop.Square = .{
+        .x = 125,
+        .y = 8,
+    };
+
+    try stdout.print("Square area 1: {d} | Square area 2: {d} | ", .{sqr.area(), sqr2.area()});
+    try stdout.print("Distance Vectors: {d}\n", .{vec1.distance(vec2)});
+    vec1.double();
+    try stdout.print("Distance Vectors after double: {d}\n", .{vec1.distance(vec2)});
+    vec1.triple();
+    try stdout.print("Distance Vectors after triple: {d}\n", .{vec1.distance(vec2)});
+    try stdout.flush();
 }
 
 fn deferCheck() !void {
