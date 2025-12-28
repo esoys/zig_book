@@ -1,4 +1,5 @@
 const std = @import("std");
+const oop = @import("oop.zig");
 
 pub fn main() !void {
     var stdout_buffer: [1024]u8 = undefined;
@@ -116,6 +117,29 @@ pub fn main() !void {
     try stdout.flush();
 
 
+    var test_num: i32 = 4;
+    p_add2(&test_num);
+    try stdout.print("before add: 4, after: {d}\n", .{test_num});
+    try stdout.flush();
+
+    const new_user: oop.User = oop.User.init(1, "Erik", "e@mail.com");
+    try new_user.print_name();
+
+    // mit der punktschreibweise ".{...} erklärt man ein anonymes struct literal. durch den punkt davor wird der datatype durch den compiler inferred"
+    // der compiler braucht aber hinweise auf den type, wie etwa die return signatur einer function, oder die anotation eines objekts (wie hier)
+    const user_wo_init: oop.User = .{
+        .id = 10,
+        .name = "Soysal",
+        .email = "mail@e.com",
+    };
+    try user_wo_init.print_name();
+
+    const other_user = oop.User {
+        .id = 2,
+        .name = "kek",
+        .email = "kek@mail.com",
+    };
+    try other_user.print_name();
 }
 
 fn deferCheck() !void {
@@ -130,3 +154,9 @@ fn deferCheck() !void {
 }
 
 fn errdeferCheck() !void { return error.TestError; }
+
+
+// function params sind immutable, man kann sie aber verändern, wenn man stattdessen ein pointer weiter gibt
+fn p_add2(x: *i32) void {
+    x.* = x.* + 2;
+}
