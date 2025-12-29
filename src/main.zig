@@ -1,5 +1,6 @@
 const std = @import("std");
 const oop = @import("oop.zig");
+const typ = @import("type.zig");
 
 pub fn main() !void {
     var stdout_buffer: [1024]u8 = undefined;
@@ -170,6 +171,9 @@ pub fn main() !void {
     vec1.triple();
     try stdout.print("Distance Vectors after triple: {d}\n", .{vec1.distance(vec2)});
     try stdout.flush();
+
+
+    try typ.floatDiv(@as(f64, 20), @as(f64, 3));
 }
 
 fn deferCheck() !void {
