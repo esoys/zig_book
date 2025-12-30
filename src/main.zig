@@ -1,6 +1,7 @@
 const std = @import("std");
 const oop = @import("oop.zig");
 const typ = @import("type.zig");
+const allocs = @import("allocators.zig");
 
 pub fn main() !void {
     var stdout_buffer: [1024]u8 = undefined;
@@ -174,8 +175,22 @@ pub fn main() !void {
 
 
     try typ.floatDiv(@as(f64, 20), @as(f64, 3));
+
+    _ = try allocs.changeStringLiteral();
+
+    const ptr: *u32 = try allocs.gpAllocator(25);
+    const val_ptr: u32 = ptr.*;
+    try stdout.print("Pointer adress: {*}, Pointer value: {d}\n", .{@as(*u32, ptr), val_ptr});
+    try stdout.flush();
+
+    allocs.freeAlloc(ptr);
 }
 
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
 fn deferCheck() !void {
     defer std.debug.print(">>function defer<<\n", .{});
     var i: i32 = 4;
