@@ -184,6 +184,7 @@ pub fn main() !void {
     try stdout.flush();
 
     allocs.freeAlloc(ptr);
+    try allocs.bufferAlloc();
 }
 
 
