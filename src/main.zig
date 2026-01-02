@@ -185,6 +185,7 @@ pub fn main() !void {
 
     allocs.freeAlloc(ptr);
     try allocs.bufferAlloc();
+    try allocs.arenaAlloc();
 }
 
 

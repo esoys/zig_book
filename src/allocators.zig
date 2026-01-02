@@ -52,3 +52,17 @@ pub fn bufferAlloc() !void {
     }
     defer fba_allocator.free(input);
 }
+
+pub fn arenaAlloc() !void {
+    var aa = std.heap.ArenaAllocator.init(gpa.allocator());
+    // arena accloactor kann alle einzeln allocierten memory bereiche auf einmal frei geben mit deinit
+    defer aa.deinit();
+
+    const aAllocator = aa. allocator();
+
+    const in1 = try aAllocator.alloc(u8, 10);
+    const in2 = try aAllocator.alloc(u8, 5);
+    const in3 = try aAllocator.alloc(u8, 15);
+    try stdout.print("Arena Allocator -> in1: {X}, in2: {X}, in3: {X}\n", .{in1, in2, in3});
+    try stdout.flush();
+}
