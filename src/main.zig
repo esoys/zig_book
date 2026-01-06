@@ -2,6 +2,7 @@ const std = @import("std");
 const oop = @import("oop.zig");
 const typ = @import("type.zig");
 const allocs = @import("allocators.zig");
+const alloc2 = @import("alloc2.zig");
 
 pub fn main() !void {
     var stdout_buffer: [1024]u8 = undefined;
@@ -186,6 +187,7 @@ pub fn main() !void {
     allocs.freeAlloc(ptr);
     try allocs.bufferAlloc();
     try allocs.arenaAlloc();
+
 }
 
 
